@@ -30,3 +30,7 @@ class MemoryCache:
         for k in stale:
             self._store.pop(k, None)
         return len(stale)
+
+
+def fetch_many(cache_obj, keys: list) -> dict:
+    return {k: cache_obj.get(k) for k in keys if cache_obj.get(k) is not None}
