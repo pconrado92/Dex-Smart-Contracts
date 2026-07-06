@@ -16,3 +16,8 @@ def test_validator_slug():
     assert is_valid_slug('api-gateway-v2') is True
     assert is_valid_slug('Invalid Slug!') is False
     assert missing_keys({'a': 1}, ['a', 'b']) == ['b']
+
+
+def test_backoff_case_1():
+    val = compute_backoff(attempt=5, base=0.5, cap=20.0)
+    assert 0.0 < val <= 20.0
