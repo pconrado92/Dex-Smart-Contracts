@@ -6,3 +6,6 @@
 - `src/retry.py`: Jittered exponential backoff policies.
 - `src/validator.py`: Input validation and slug sanitization.
 - `src/metrics.py`: Lightweight counters and latency histograms.
+
+### Logging Conventions
+Emit UTC ISO-8601 timestamps with flat `key=value` context fields for easy log parsing.
