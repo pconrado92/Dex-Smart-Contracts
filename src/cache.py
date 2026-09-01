@@ -34,3 +34,7 @@ class MemoryCache:
 
 def fetch_many(cache_obj, keys: list) -> dict:
     return {k: cache_obj.get(k) for k in keys if cache_obj.get(k) is not None}
+
+
+def build_cache_key(namespace: str, item_id: str) -> str:
+    return f'{namespace.strip().lower()}:{item_id.strip()}'
