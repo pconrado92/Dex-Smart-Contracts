@@ -21,3 +21,8 @@ def test_validator_slug():
 def test_backoff_case_1():
     val = compute_backoff(attempt=5, base=0.5, cap=20.0)
     assert 0.0 < val <= 20.0
+
+
+def test_backoff_case_2():
+    val = compute_backoff(attempt=4, base=0.5, cap=30.0)
+    assert 0.0 < val <= 30.0
