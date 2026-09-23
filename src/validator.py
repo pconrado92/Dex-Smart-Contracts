@@ -10,3 +10,7 @@ def missing_keys(payload: Dict, required: Iterable[str]) -> List[str]:
 
 def is_valid_slug(value: str) -> bool:
     return bool(SLUG_RE.match(str(value or '').strip()))
+
+
+def normalize_page_bounds(page: int = 1, limit: int = 25, max_limit: int = 100):
+    return max(1, int(page)), max(1, min(int(limit), max_limit))
