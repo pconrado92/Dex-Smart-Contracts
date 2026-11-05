@@ -12,3 +12,6 @@ Emit UTC ISO-8601 timestamps with flat `key=value` context fields for easy log p
 
 ### Configuration Precedence
 Process environment variables always override default values defined in `config/defaults.json`.
+
+### Shutdown Checklist
+Flush in-flight metrics snapshots and release local file locks before exiting worker loops.
