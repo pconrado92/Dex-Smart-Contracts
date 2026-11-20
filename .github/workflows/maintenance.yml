@@ -1,0 +1,27 @@
+name: Repository Maintenance
+on:
+  schedule:
+    - cron: '42 17 * * *'
+  workflow_dispatch:
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run routine check
+        run: |
+          git config --local user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config --local user.name "${{ github.actor }}"
+          REST_CHANCE=$(( RANDOM % 100 ))
+          if [ $REST_CHANCE -lt 25 ]; then exit 0; fi
+          NUM_COMMITS=$(( ( RANDOM % 3 ) + 1 ))
+          for i in $(seq 1 $NUM_COMMITS); do
+            echo "sync-$i $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> ".maintenance.stamp"
+            git add ".maintenance.stamp"
+            git commit -m "chore: routine maintenance check [skip ci]"
+            sleep $(( ( RANDOM % 3 ) + 2 ))
+          done
+          git push
